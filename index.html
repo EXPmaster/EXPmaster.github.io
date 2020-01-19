@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -80,11 +80,11 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Leo&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="Leo&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Manwen Liao">
 <meta name="twitter:card" content="summary">
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <title>Hexo</title>
+  <title>Leo's blog</title>
   
 
 
@@ -133,7 +133,7 @@
 
 <meta name="generator" content="Hexo 4.2.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -152,7 +152,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">Leo's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -229,16 +229,157 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/19/DARTS%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Manwen Liao">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Leo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/19/DARTS%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" itemprop="url">DARTS论文笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-19T12:13:59+08:00">
+                2020-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="DARTS-论文笔记"><a href="#DARTS-论文笔记" class="headerlink" title="DARTS 论文笔记"></a>DARTS 论文笔记</h1><p><em>notes taken by lmw</em></p>
+<p>论文链接：<a href="https://arxiv.org/abs/1806.09055" target="_blank" rel="noopener">DARTS: Differentiable Architecture Search</a></p>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>DARTS 是用于自动构建神经网络结构并优化网络参数，基于梯度的算法，通过连续化神经网络的<em>architecture representation</em> 以便使用梯度来优化网络结构，时间开销较传统的RL法、evolution法相比降低了很多。</p>
+<h3 id="2-算法"><a href="#2-算法" class="headerlink" title="2. 算法"></a>2. 算法</h3><h4 id="2-1-算法内容"><a href="#2-1-算法内容" class="headerlink" title="2.1 算法内容"></a>2.1 算法内容</h4><p><img src="C:%5CUsers%5C85126%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191128234835766.png" alt="image-20191128234835766"></p>
+<ol start="0">
+<li>一个完整的网络由多个cell组成，cell用图来表示，每个cell有两个输入结点和一个输出结点，图的每一个结点 $x^{(i)}$ 作为<em>latent representation</em>（神经网络中间层的输出，如feature map），由之前结点与对应的operation相乘再求和得到，图的边表示一种运算$o^{(i,j)}$ ，用于转变$x^i$ 到 $x^j$：</li>
+</ol>
+<p>$$<br>x^j = \sum_{i&lt;j}o^{(i,j)}(x^i)<br>$$</p>
+<ol>
+<li><p>对图中每一条边，将操作 $ o^{(i,j)}$ 变为 $\bar{o}^{(i,j)}$ 以连续化 <em>search space</em> ，然后将两结之间运算 $o$ 的输出与其网络参数混合在一起构建成 $\alpha^{(i,j)}$ ，其中<br>$$<br>\bar{o}^{(i,j)}(x)=\sum_{o \in \mathcal O}\frac{exp(\alpha_o^{(i,j)})}{\Sigma_{o’\in \mathcal O} exp(\alpha_{o’}^{(i,j)})}o(x)<br>$$</p>
+</li>
+<li><p>计算梯度 $\bigtriangledown_\alpha \mathcal{L}<em>{val}(w-\xi\bigtriangledown_w\mathcal{L}</em>{train}(w,\alpha),\alpha)$ ，通过梯度下降优化网络结构 $\alpha$，具体地：</p>
+<p>记  $w’=w-\xi \bigtriangledown_\alpha \mathcal L_{train}(w,\alpha)$ ，可知：</p>
+</li>
+</ol>
+<p>$$<br>\begin{equation}<br>\begin{aligned}<br>&amp;\bigtriangledown_\alpha \mathcal{L}<em>{val}(w^*(\alpha),\alpha)\<br>&amp;\approx \bigtriangledown_\alpha \mathcal{L}</em>{val}(w-\xi \bigtriangledown_w<br>\mathcal{L}<em>{train}(w,\alpha),\alpha)\<br>&amp;=\bigtriangledown_\alpha \mathcal{L}</em>{val}(w’,\alpha)-\xi<br>\bigtriangledown_{\alpha,w}^2 \mathcal{L}<em>{train}(w,\alpha)<br>\bigtriangledown</em>{w’}\mathcal{L}_{val}(w’,\alpha)\<br>\end{aligned}<br>\end{equation}<br>$$</p>
+<p>​        其中，二阶导数可近似为：<br>$$<br>\bigtriangledown_{\alpha,w}^2 \mathcal{L}<em>{train}(w,\alpha)<br>\bigtriangledown</em>{w’}\mathcal{L}<em>{val}(w’,\alpha)<br>\approx \frac{\bigtriangledown_\alpha \mathcal L</em>{train}(w^{+},\alpha)-<br>\bigtriangledown_\alpha \mathcal L_{train}(w^-,\alpha)}{2 \epsilon}<br>\where \quad w^\pm = w \pm \epsilon \bigtriangledown_{w’} \mathcal L_{val}(w’, \alpha)<br>$$</p>
+<ol>
+<li>计算梯度 $\bigtriangledown_w \mathcal{L}_{train}(w,\alpha)$ ，并通过梯度下降优化 $w$</li>
+<li>重复2，3步骤直到收敛</li>
+<li>离散化以得到网络结构</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Manwen Liao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo's blog">
     </span>
 
     
@@ -383,7 +524,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-author-name" itemprop="name">Manwen Liao</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -394,7 +535,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -439,7 +580,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Manwen Liao</span>
 
   
 </div>
