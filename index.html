@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-CN">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -178,9 +178,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+          <a href="/tags" rel="section">
             
             Tags
           </a>
@@ -188,9 +186,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+          <a href="/categories" rel="section">
             
             Categories
           </a>
@@ -271,6 +267,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -300,45 +318,16 @@
       
         
           
-            <h1 id="DARTS-论文笔记"><a href="#DARTS-论文笔记" class="headerlink" title="DARTS 论文笔记"></a>DARTS 论文笔记</h1><p><em>notes taken by lmw</em></p>
-<p>论文链接：<a href="https://arxiv.org/abs/1806.09055" target="_blank" rel="noopener">DARTS: Differentiable Architecture Search</a></p>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>DARTS 是用于自动构建神经网络结构并优化网络参数，基于梯度的算法，通过连续化神经网络的<em>architecture representation</em> 以便使用梯度来优化网络结构，时间开销较传统的RL法、evolution法相比降低了很多。</p>
-<h3 id="2-算法"><a href="#2-算法" class="headerlink" title="2. 算法"></a>2. 算法</h3><h4 id="2-1-算法内容"><a href="#2-1-算法内容" class="headerlink" title="2.1 算法内容"></a>2.1 算法内容</h4><p><img src="C:\Users\85126\AppData\Roaming\Typora\typora-user-images\image-20191128234835766.png" alt="image-20191128234835766"></p>
-<ol>
-<li>一个完整的网络由多个cell组成，cell用图来表示，每个cell有两个输入结点和一个输出结点，图的每一个结点 $x^{(i)}$ 作为<em>latent representation</em>（神经网络中间层的输出，如feature map），由之前结点与对应的operation相乘再求和得到，图的边表示一种运算$o^{(i,j)}$ ，用于转变$x^i$ 到 $x^j$：</li>
-</ol>
-<script type="math/tex; mode=display">
-x^j = \sum_{i<j}o^{(i,j)}(x^i)</script><ol>
-<li><p>对图中每一条边，将操作 $ o^{(i,j)}$ 变为 $\bar{o}^{(i,j)}$ 以连续化 <em>search space</em> ，然后将两结之间运算 $o$ 的输出与其网络参数混合在一起构建成 $\alpha^{(i,j)}$ ，其中</p>
-<script type="math/tex; mode=display">
-\bar{o}^{(i,j)}(x)=\sum_{o \in \mathcal O}\frac{exp(\alpha_o^{(i,j)})}{\Sigma_{o'\in \mathcal O} exp(\alpha_{o'}^{(i,j)})}o(x)</script></li>
-<li><p>计算梯度 $\bigtriangledown_\alpha \mathcal{L}_{val}(w-\xi\bigtriangledown_w\mathcal{L}_{train}(w,\alpha),\alpha)$ ，通过梯度下降优化网络结构 $\alpha$，具体地：</p>
-<p>记  $w’=w-\xi \bigtriangledown_\alpha \mathcal L_{train}(w,\alpha)$ ，可知：</p>
-</li>
-</ol>
-<script type="math/tex; mode=display">
-\begin{equation}
-\begin{aligned}
-&\bigtriangledown_\alpha \mathcal{L}_{val}(w^*(\alpha),\alpha)\\
-&\approx \bigtriangledown_\alpha \mathcal{L}_{val}(w-\xi \bigtriangledown_w
-\mathcal{L}_{train}(w,\alpha),\alpha)\\
-&=\bigtriangledown_\alpha \mathcal{L}_{val}(w',\alpha)-\xi 
-\bigtriangledown_{\alpha,w}^2 \mathcal{L}_{train}(w,\alpha)
-\bigtriangledown_{w'}\mathcal{L}_{val}(w',\alpha)\\
-\end{aligned}
-\end{equation}</script><p>​        其中，二阶导数可近似为：</p>
-<script type="math/tex; mode=display">
-\bigtriangledown_{\alpha,w}^2 \mathcal{L}_{train}(w,\alpha)
-\bigtriangledown_{w'}\mathcal{L}_{val}(w',\alpha)
-\approx \frac{\bigtriangledown_\alpha \mathcal L_{train}(w^{+},\alpha)-
-\bigtriangledown_\alpha \mathcal L_{train}(w^-,\alpha)}{2 \epsilon}
-\\where \quad w^\pm = w \pm \epsilon \bigtriangledown_{w'} \mathcal L_{val}(w', \alpha)</script><ol>
-<li>计算梯度 $\bigtriangledown_w \mathcal{L}_{train}(w,\alpha)$ ，并通过梯度下降优化 $w$</li>
-<li>重复2，3步骤直到收敛</li>
-<li>离散化以得到网络结构</li>
-</ol>
-
-          
+          论文链接：DARTS: Differentiable Architecture Search
+1. 概述DARTS 是用于自动构建神经网络结构并优化网络参数，基于梯度的算法，通过连续化神经网络的architecture representation 以便使用梯度来优化网络结构，时间开销较传统的RL法
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/19/DARTS%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -456,17 +445,15 @@ x^j = \sum_{i<j}o^{(i,j)}(x^i)</script><ol>
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/18/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -553,7 +540,25 @@ x^j = \sum_{i<j}o^{(i,j)}(x^i)</script><ol>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
