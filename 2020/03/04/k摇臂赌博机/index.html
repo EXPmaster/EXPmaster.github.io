@@ -86,15 +86,15 @@
 
 
 
-<meta name="description" content="​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡exploration和exploitation的一个方法是$\epsilon$-greedy，即以$\epsilon$的概率去贪心，以$1-\epsilon$的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌博机的例">
+<meta name="description" content="​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡exploration和exploitation的一个方法是$\epsilon$-greedy，即以$1-\epsilon$的概率去贪心，以$\epsilon$(较小)的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k摇臂赌博机">
 <meta property="og:url" content="http://expmaster.github.io/2020/03/04/k%E6%91%87%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA/index.html">
 <meta property="og:site_name" content="Leo&#39;s blog">
-<meta property="og:description" content="​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡exploration和exploitation的一个方法是$\epsilon$-greedy，即以$\epsilon$的概率去贪心，以$1-\epsilon$的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌博机的例">
+<meta property="og:description" content="​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡exploration和exploitation的一个方法是$\epsilon$-greedy，即以$1-\epsilon$的概率去贪心，以$\epsilon$(较小)的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-04T13:41:58.000Z">
-<meta property="article:modified_time" content="2020-03-04T15:52:04.914Z">
+<meta property="article:modified_time" content="2020-03-04T16:06:13.472Z">
 <meta property="article:author" content="Manwen Liao">
 <meta property="article:tag" content="k-armed bandit">
 <meta name="twitter:card" content="summary">
@@ -325,12 +325,13 @@
       
 
       
-        <p>​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡<em>exploration</em>和<em>exploitation</em>的一个方法是$\epsilon$-<em>greedy</em>，即以$\epsilon$的概率去贪心，以$1-\epsilon$的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌博机的例子——有k中决策方式，每一种决策的收益不是常数，且不同决策会带来不同的收益（<em>reward</em>）。以下为几种经典的方法来确定<em>reward</em>并进行决策。</p>
+        <p>​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡<em>exploration</em>和<em>exploitation</em>的一个方法是$\epsilon$-<em>greedy</em>，即以$1-\epsilon$的概率去贪心，以$\epsilon$(较小)的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌博机的例子——有k中决策方式，每一种决策的收益不是常数，且不同决策会带来不同的收益（<em>reward</em>）。以下为几种经典的方法来确定<em>reward</em>并进行决策。</p>
 <h3 id="1-Action-value-Methods"><a href="#1-Action-value-Methods" class="headerlink" title="1. Action-value Methods"></a>1. Action-value Methods</h3><p>​    核心思想：决策a的期望收益定义为a已出现的收益的平均值，通过$\epsilon$-<em>greedy</em>算法，我们可以得出一个较好的决策方案。</p>
 <script type="math/tex; mode=display">
 Q_t(a)=\frac{\sum_{i=1}^{t-1}R_i \cdot \mathbb{1}_{A_i=a}}{\sum
 _{i=1}^{t-1} \mathbb{1}_{A_i=a}}\\
-A_t=\mathop{\arg\max}_aQ_t(a)</script><p>当$t\to\infty$时，$Q_t(a) \to q_<em>(a)$， 其中，$q_</em>(a)=\mathbb{E}[R_t|A_t=a]$</p>
+A_t=\mathop{\arg\max}_aQ_t(a)</script><p>当$t\to\infty$时，$Q_t(a) \to q_*(a)$, </p>
+<p>其中 $q_*(a)=\mathbb{E}[R_t|A_t=a]$</p>
 <ul>
 <li>为节约随时间改变引起的计算开销增大，可将Q表示为差分方程的形式：</li>
 </ul>
@@ -357,12 +358,12 @@ H_{t+1}(A_t)=H_t(A_t)+\alpha(R_t-\bar{R}_t)(1-\pi_t(A_t)),\\
 H_{t+1}(a)=H_t(a)-\alpha(R_t-\bar R_t)\pi_t(a), \quad a\neq A_t</script><p>其中$\alpha&gt;0$代表一个step-size参数（学习率），$\bar{R}_t$表示t之前<strong>所有</strong>的reward的平均</p>
 <p>​    通过公式可看出，每次迭代更新时，对于选择到的决策，若当前reward比之前的平均reward大时，该决策的偏好函数值增大，否则减小；对于没选择到的决策，其变化与选择到的决策相反。</p>
 <ul>
-<li>以上迭代公式与SGD形式是等价的：<script type="math/tex; mode=display">
+<li><p>以上迭代公式与SGD形式是等价的：</p>
+<script type="math/tex; mode=display">
 H_{t+1}(a)=H_t(a)+\alpha \frac{\partial \mathbb E[R_t]}{\partial H_t(a)}\\
 \mathbb E[R_t]=\sum\limits_x \pi_t(x)q_*(x)</script></li>
-</ul>
-<ul>
-<li>要特别注意，$\sum\limits_x\pi_t(x)=1$，因此有：$\sum_x \frac{\partial \pi_t(x)}{\partial H_t(a)}=0$</li>
+<li><p>要特别注意，$\sum\limits_x\pi_t(x)=1$，因此有：$\sum_x \frac{\partial \pi_t(x)}{\partial H_t(a)}=0$</p>
+</li>
 </ul>
 
       
