@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="k-armed bandit," />
 
 
 
@@ -94,8 +94,9 @@
 <meta property="og:description" content="​    在强化学习中，为最大化收益，我们可以贪心地选取已知收益最大的决策，但是在未探索的决策中，可能存在比已知的最好决策更好的决策，因此我们需要在一些时候选择去探索，平衡exploration和exploitation的一个方法是$\epsilon$-greedy，即以$\epsilon$的概率去贪心，以$1-\epsilon$的概率去探索。那么如何确定一个决策的收益呢？假定一个k摇臂赌博机的例">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-04T13:41:58.000Z">
-<meta property="article:modified_time" content="2020-03-04T15:46:13.820Z">
+<meta property="article:modified_time" content="2020-03-04T15:52:04.914Z">
 <meta property="article:author" content="Manwen Liao">
+<meta property="article:tag" content="k-armed bandit">
 <meta name="twitter:card" content="summary">
 
 
@@ -378,6 +379,12 @@ H_{t+1}(a)=H_t(a)+\alpha \frac{\partial \mathbb E[R_t]}{\partial H_t(a)}\\
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/k-armed-bandit/" rel="tag"># k-armed bandit</a>
+          
+        </div>
+      
 
       
       
@@ -498,7 +505,7 @@ H_{t+1}(a)=H_t(a)+\alpha \frac{\partial \mathbb E[R_t]}{\partial H_t(a)}\\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
