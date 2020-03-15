@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="插值," />
+  <meta name="keywords" content="MDP," />
 
 
 
@@ -86,18 +86,35 @@
 
 
 
-<meta name="description" content="引入​    当使用单一函数用于拟合数据时，有时不能达到很好的效果，此时我们可以考虑用分段函数来拟合。为预测未知数据点，我们可以使用插值的方法。 ​    在连续数据点对间使用直线来拟合，称为线性插值；在连续的数据点对间使用不同的三阶多项式来预测，称为三阶样条插值。 算法考虑有三个数据点的情况，在区间 $x_1\leq x &lt;x_2$ 和 $x_2\leq x&lt;x_3$ 中，分别定义样">
+<meta name="description" content="1. Markov Decision ProcessBasics​    马尔可夫决策过程指的是一类当前行为会影响到当前以及之后的回馈的决策过程。通常的，agent和environment的交互可以以这张图来表示：  那么agent的状态、行为、收益可以用这样的一个序列表示：  S_0,A_0,R_1,S_1,A_1,R_1,S_2,A_2,R_3,...MDP的动态过程就可以使用这样的一个四元概">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三阶样条插值">
-<meta property="og:url" content="http://expmaster.github.io/2020/01/20/%E4%B8%89%E9%98%B6%E6%A0%B7%E6%9D%A1%E6%8F%92%E5%80%BC/index.html">
+<meta property="og:title" content="MDP与动态规划">
+<meta property="og:url" content="http://expmaster.github.io/2020/03/15/MDP%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
 <meta property="og:site_name" content="Leo&#39;s blog">
-<meta property="og:description" content="引入​    当使用单一函数用于拟合数据时，有时不能达到很好的效果，此时我们可以考虑用分段函数来拟合。为预测未知数据点，我们可以使用插值的方法。 ​    在连续数据点对间使用直线来拟合，称为线性插值；在连续的数据点对间使用不同的三阶多项式来预测，称为三阶样条插值。 算法考虑有三个数据点的情况，在区间 $x_1\leq x &lt;x_2$ 和 $x_2\leq x&lt;x_3$ 中，分别定义样">
+<meta property="og:description" content="1. Markov Decision ProcessBasics​    马尔可夫决策过程指的是一类当前行为会影响到当前以及之后的回馈的决策过程。通常的，agent和environment的交互可以以这张图来表示：  那么agent的状态、行为、收益可以用这样的一个序列表示：  S_0,A_0,R_1,S_1,A_1,R_1,S_2,A_2,R_3,...MDP的动态过程就可以使用这样的一个四元概">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-20T07:40:18.000Z">
-<meta property="article:modified_time" content="2020-01-20T08:32:13.353Z">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315205052715.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315205902682.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315210210391.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315210414915.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315210532696.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315210649967.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315211331021.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315212531648.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315213059202.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315221842721.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315221958549.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315213236299.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315222214501.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315223618348.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315225215085.png">
+<meta property="og:image" content="http://expmaster.github.io/.io//image-20200315225650017.png">
+<meta property="article:published_time" content="2020-03-15T12:44:22.000Z">
+<meta property="article:modified_time" content="2020-03-15T14:57:04.193Z">
 <meta property="article:author" content="Manwen Liao">
-<meta property="article:tag" content="插值">
+<meta property="article:tag" content="MDP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://expmaster.github.io/.io//image-20200315205052715.png">
 
 
 
@@ -127,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://expmaster.github.io/2020/01/20/三阶样条插值/"/>
+  <link rel="canonical" href="http://expmaster.github.io/2020/03/15/MDP与动态规划/"/>
 
 
 
 
 
-  <title>三阶样条插值 | Leo's blog</title>
+  <title>MDP与动态规划 | Leo's blog</title>
   
 
 
@@ -236,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://expmaster.github.io/2020/01/20/%E4%B8%89%E9%98%B6%E6%A0%B7%E6%9D%A1%E6%8F%92%E5%80%BC/">
+    <link itemprop="mainEntityOfPage" href="http://expmaster.github.io/2020/03/15/MDP%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Manwen Liao">
@@ -253,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">三阶样条插值</h1>
+          <h1 class="post-title" itemprop="name headline">MDP与动态规划</h1>
         
 
         <div class="post-meta">
@@ -265,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-20T15:40:18+08:00">
-                2020-01-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-15T20:44:22+08:00">
+                2020-03-15
               </time>
             
 
@@ -288,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" itemprop="url" rel="index">
-                    <span itemprop="name">数学建模</span>
+                  <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">强化学习</span>
                   </a>
                 </span>
 
@@ -325,35 +342,42 @@
       
 
       
-        <h4 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h4><p>​    当使用单一函数用于拟合数据时，有时不能达到很好的效果，此时我们可以考虑用分段函数来拟合。为预测未知数据点，我们可以使用<strong>插值</strong>的方法。</p>
-<p>​    在连续数据点对间使用直线来拟合，称为<strong>线性插值</strong>；在连续的数据点对间使用不同的三阶多项式来预测，称为<strong>三阶样条插值</strong>。</p>
-<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p>考虑有三个数据点的情况，在区间 $x_1\leq x &lt;x_2$ 和 $x_2\leq x&lt;x_3$ 中，分别定义样条函数：</p>
+        <h3 id="1-Markov-Decision-Process"><a href="#1-Markov-Decision-Process" class="headerlink" title="1. Markov Decision Process"></a>1. Markov Decision Process</h3><h4 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h4><p>​    马尔可夫决策过程指的是一类当前行为会影响到当前以及之后的回馈的决策过程。通常的，agent和environment的交互可以以这张图来表示：</p>
+<p><img src="/.io//image-20200315205052715.png" alt="image-20200315205052715"></p>
+<p>那么agent的状态、行为、收益可以用这样的一个序列表示：</p>
 <script type="math/tex; mode=display">
-S_1(x)=a_1+b_1x+c_1x^2+d_1x^3 \quad x\in [x_1,x_2)\\
-S_2(x)=a_2+b_2x+c_2x^2+d_2x^3 \quad x\in [x_2,x_3]</script><p>它们的导数：</p>
-<script type="math/tex; mode=display">
-S'_1(x)=b_1+2c_1x+3d_1x^2 \quad x\in[x_1,x_2)\\
-S''_1(x)=2c_1+6d_1x \quad x\in [x_1,x_2)\\
-S'_2(x)=b_2+2c_2x+3d_2x^2 \quad x\in[x_2,x_3]\\
-S''_2(x)=2c_2+6d_2x \quad x\in [x_2,x_3]</script><p>让每一样条的端点通过数据点，有：</p>
-<script type="math/tex; mode=display">
-y_1=S_1(x_1)=a_1+b_1x_1+c_1x_1^2+d_1x_1^3\\
-y_2=S_1(x_2)=a_1+b_1x_2+c_1x_2^2+d_1x_2^3\\
-y_2=S_2(x_2)=a_2+b_2x_2+c_2x_2^2+d_2x_2^3\\
-y_3=S_2(x_3)=a_2+b_2x_3+c_2x_3^2+d_2x_3^3</script><p>​    三阶样条插值不仅要让每一内部数据点的斜率匹配，还要让曲率匹配，即在每一内部数据点邻接的一阶导数和二阶导数都要匹配，因此，有方程：</p>
-<script type="math/tex; mode=display">
-S'_1(x_2)=S'_2(x_2)\\
-S''_1(x_2)=S''_2(x_2)</script><p>​    对于外侧的数据点可有两种条件：</p>
-<ol>
-<li><p>外侧端点的一阶导数没有变化，即二阶导数为0，这样产生的样条称为<strong>自然样条</strong>：</p>
-<script type="math/tex; mode=display">
-S''_1(x_1)=S''_2(x_3)=0</script></li>
-<li><p>外侧端点的一阶导数的值已知，称为<strong>强制样条</strong>：</p>
-<script type="math/tex; mode=display">
-S'_1(x_1)=f'(x_1)\\
-S'_2(x_3)=f'(x_3)</script><p>一般除非外侧端点的一阶导数明确已知，通常使用自然样条。</p>
-</li>
-</ol>
+S_0,A_0,R_1,S_1,A_1,R_1,S_2,A_2,R_3,...</script><p>MDP的动态过程就可以使用这样的一个四元概率函数表示：</p>
+<p><img src="/.io//image-20200315205902682.png" alt="image-20200315205902682"></p>
+<p>该函数表示在s状态下执行a之后，新的状态s’和回馈r的联合概率函数，我们可以很容易发现对所有的s’和r的概率求和，结果为1，即：</p>
+<p><img src="/.io//image-20200315210210391.png" alt="image-20200315210210391"></p>
+<p>同样的，在给定s状态下执行a之后，到达状态s’的概率为：</p>
+<p><img src="/.io//image-20200315210414915.png" alt="image-20200315210414915"></p>
+<p>在s状态下执行a的期望收益为：</p>
+<p><img src="/.io//image-20200315210532696.png" alt="image-20200315210532696"></p>
+<p>状态-行为-下一状态的三元联合概率为：</p>
+<p><img src="/.io//image-20200315210649967.png" alt="image-20200315210649967"></p>
+<h4 id="Returns"><a href="#Returns" class="headerlink" title="Returns"></a>Returns</h4><p>如何来描述期望回馈（return）呢？可以使用从当前阶段之后所有阶段的累计收益（reward），当然，对于非有限马尔可夫决策过程，为了使回馈级数收敛，我们可以给收益乘上一个衰减系数$\gamma\in[0,1]$:<img src="/.io//image-20200315211331021.png" alt="image-20200315211331021"></p>
+<h4 id="Policies-and-Value-Functions"><a href="#Policies-and-Value-Functions" class="headerlink" title="Policies and Value Functions"></a>Policies and Value Functions</h4><p>Policy 表示一个从选择行动的方式到概率的映射，如：$\pi(a|s)$表示在s状态下进行a行动的概率</p>
+<p>value function，亦称state-value function for policy $\pi$，表示从状态s开始，通过policy $\pi$ 来行动，得到的期望回馈：</p>
+<p><img src="/.io//image-20200315212531648.png" alt="image-20200315212531648"></p>
+<p>特别注意的是，最终状态的回馈为0</p>
+<p>对于在状态s下选择了行动a之后，再通过policy $\pi$来行动的value，可以用一个action-value function来表示：</p>
+<p><img src="/.io//image-20200315213059202.png" alt="image-20200315213059202"></p>
+<p>最优value函数：</p>
+<p><img src="/.io//image-20200315221842721.png" alt="image-20200315221842721"></p>
+<p>最优q函数：</p>
+<p><img src="/.io//image-20200315221958549.png" alt="image-20200315221958549"></p>
+<h4 id="贝尔曼方程"><a href="#贝尔曼方程" class="headerlink" title="贝尔曼方程"></a>贝尔曼方程</h4><p>该方程表征了一个状态的value与其后继状态value之间的关系：</p>
+<p><img src="/.io//image-20200315213236299.png" alt="image-20200315213236299"></p>
+<h3 id="2-Dynamic-Programming"><a href="#2-Dynamic-Programming" class="headerlink" title="2. Dynamic Programming"></a>2. Dynamic Programming</h3><p>​    对于环境已知（已知各个状态，状态之间的关系，从一个状态转移到另一个状态的reward）的情况，我们可以使用DP来形成最优策略，以获得最大的收益，通过Bellman方程我们可以将value function改写成近似的迭代形式：</p>
+<p><img src="/.io//image-20200315222214501.png" alt="image-20200315222214501"></p>
+<p>该方程表明，第k+1次迭代时，s状态的value可以由s的后继状态第k次迭代时的value生成。</p>
+<h4 id="Policy-Iteration"><a href="#Policy-Iteration" class="headerlink" title="Policy Iteration"></a>Policy Iteration</h4><p>​    我们可以通过优化policy来获得最大收益，利用$v_\pi$生成一个更好的policy $\pi’$ 后，我们可以迭代地，通过不断的策略评估和策略更新来生成更好的policy，直到最终形会成最优策略，（为什么贪心算法可以形成全局最优？因为value函数包含了从当前状态到最终状态的所有value信息）算法如下：</p>
+<p><img src="/.io//image-20200315223618348.png" alt="image-20200315223618348"></p>
+<h4 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h4><p>​    Policy Iteration的一个缺点是每次迭代过程都需要进行policy评估，而每一次的策略评估都会遍历一遍状态集合，这就使迭代的计算开销比较大。事实上，我们可以对Policy Iteration进行截断，并且将Policy Improvement也包含在迭代过程中，这种方法称为Value Iteration，将Bellman最优方程改为迭代的形式：</p>
+<p><img src="/.io//image-20200315225215085.png" alt="image-20200315225215085"></p>
+<p>因为该迭代过程保证了 $v_<em>$ 是不会消失的，所以序列{$v_k$}最终会收敛到$v_</em>$，算法如下：</p>
+<p><img src="/.io//image-20200315225650017.png" alt="image-20200315225650017"></p>
 
       
     </div>
@@ -371,7 +395,7 @@ S'_2(x_3)=f'(x_3)</script><p>一般除非外侧端点的一阶导数明确已知
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%8F%92%E5%80%BC/" rel="tag"># 插值</a>
+            <a href="/tags/MDP/" rel="tag"># MDP</a>
           
         </div>
       
@@ -384,8 +408,8 @@ S'_2(x_3)=f'(x_3)</script><p>一般除非外侧端点的一阶导数明确已知
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/19/hexo%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" rel="next" title="hexo常用操作">
-                <i class="fa fa-chevron-left"></i> hexo常用操作
+              <a href="/2020/03/04/k%E6%91%87%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA/" rel="next" title="k摇臂赌博机">
+                <i class="fa fa-chevron-left"></i> k摇臂赌博机
               </a>
             
           </div>
@@ -393,10 +417,6 @@ S'_2(x_3)=f'(x_3)</script><p>一般除非外侧端点的一阶导数明确已知
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/04/k%E6%91%87%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA/" rel="prev" title="k摇臂赌博机">
-                k摇臂赌博机 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -542,7 +562,7 @@ S'_2(x_3)=f'(x_3)</script><p>一般除非外侧端点的一阶导数明确已知
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法"><span class="nav-number">2.</span> <span class="nav-text">算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Markov-Decision-Process"><span class="nav-number">1.</span> <span class="nav-text">1. Markov Decision Process</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basics"><span class="nav-number">1.1.</span> <span class="nav-text">Basics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Returns"><span class="nav-number">1.2.</span> <span class="nav-text">Returns</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Policies-and-Value-Functions"><span class="nav-number">1.3.</span> <span class="nav-text">Policies and Value Functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贝尔曼方程"><span class="nav-number">1.4.</span> <span class="nav-text">贝尔曼方程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Dynamic-Programming"><span class="nav-number">2.</span> <span class="nav-text">2. Dynamic Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Policy-Iteration"><span class="nav-number">2.1.</span> <span class="nav-text">Policy Iteration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Value-Iteration"><span class="nav-number">2.2.</span> <span class="nav-text">Value Iteration</span></a></li></ol></li></ol></div>
             
 
           </div>
