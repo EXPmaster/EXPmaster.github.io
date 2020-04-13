@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Attention," />
 
 
 
@@ -86,13 +86,24 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leo&#39;s blog">
-<meta property="og:url" content="http://expmaster.github.io/archives/2020/01/index.html">
+<meta name="description" content="Attention 的作用​    注意力机制能让神经网络对关键的部位进行重点学习，从而提高模型的性能。attention的一种用法是使用teacher network生成attention map给student network学习，训练出的student network能很好的进行预测，并且具有与teacher network相似的attention map. 该方式对于训练层数少的网络比较有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pay More Attention to Attention 笔记">
+<meta property="og:url" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Leo&#39;s blog">
+<meta property="og:description" content="Attention 的作用​    注意力机制能让神经网络对关键的部位进行重点学习，从而提高模型的性能。attention的一种用法是使用teacher network生成attention map给student network学习，训练出的student network能很好的进行预测，并且具有与teacher network相似的attention map. 该方式对于训练层数少的网络比较有">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411212055455.png">
+<meta property="og:image" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411213226856.png">
+<meta property="og:image" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411213707032.png">
+<meta property="og:image" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411213945861.png">
+<meta property="og:image" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411214042215.png">
+<meta property="article:published_time" content="2020-04-13T02:01:42.000Z">
+<meta property="article:modified_time" content="2020-04-13T02:08:06.755Z">
 <meta property="article:author" content="Manwen Liao">
+<meta property="article:tag" content="Attention">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411212055455.png">
 
 
 
@@ -122,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://expmaster.github.io/archives/2020/01/"/>
+  <link rel="canonical" href="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-笔记/"/>
 
 
 
 
 
-  <title>Archive | Leo's blog</title>
+  <title>Pay More Attention to Attention 笔记 | Leo's blog</title>
   
 
 
@@ -147,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,148 +228,201 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://expmaster.github.io/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Manwen Liao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Pay More Attention to Attention 笔记</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-13T10:01:42+08:00">
+                2020-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 8 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep learning</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/01/20/%E4%B8%89%E9%98%B6%E6%A0%B7%E6%9D%A1%E6%8F%92%E5%80%BC/" itemprop="url">
-              
-                <span itemprop="name">三阶样条插值</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-01-20T15:40:18+08:00"
-              content="2020-01-20" >
-          01-20
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/01/19/hexo%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" itemprop="url">
-              
-                <span itemprop="name">hexo常用操作</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-01-19T16:05:13+08:00"
-              content="2020-01-19" >
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/01/19/DARTS%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" itemprop="url">
-              
-                <span itemprop="name">DARTS论文笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-01-19T12:13:59+08:00"
-              content="2020-01-19" >
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h4 id="Attention-的作用"><a href="#Attention-的作用" class="headerlink" title="Attention 的作用"></a>Attention 的作用</h4><p>​    注意力机制能让神经网络对关键的部位进行重点学习，从而提高模型的性能。attention的一种用法是使用teacher network生成attention map给student network学习，训练出的student network能很好的进行预测，并且具有与teacher network相似的attention map. 该方式对于训练层数少的网络比较有效</p>
+<h4 id="Attention-Transfer"><a href="#Attention-Transfer" class="headerlink" title="Attention Transfer"></a>Attention Transfer</h4><ol>
+<li><p>Activation-based attention transfer</p>
+<p>使用神经网络中某一层的输出，通过某个F映射，得到attention map：</p>
+<script type="math/tex; mode=display">
+\mathcal F: R^{C\times H\times W} \rightarrow R^{H \times W}</script><p>F的几种形式：</p>
+<p><img src="/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411212055455.png" alt="image-20200411212055455"></p>
+<p>使用网络中不同隐藏层来生成attention map的区别：</p>
+<ul>
+<li>起始层网络对于low-lever gradient points 的activation要高一些</li>
+<li>中间层attention针对最容易区分的部位的</li>
+<li>末层attention是针对物体整体的</li>
+</ul>
+<p>流程：</p>
+<p><img src="/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411213226856.png" alt="image-20200411213226856"></p>
+<p>其中，</p>
+<p><img src="/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411213707032.png" alt="image-20200411213707032"></p>
+<p>S表示student network，T表示teacher network，L为交叉熵损失函数，W表示权重</p>
+</li>
+</ol>
+<ol>
+<li><p>Gradient-based Attention Transfer</p>
+<p>使用神经网络的梯度来生成attention map，用于表征随着输入改变，输出变化的剧烈程度，对于那些输入对输出影响较大的部分应该引起更多的注意</p>
+<p>teacher network 和 student network的梯度为：</p>
+<p><img src="/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411213945861.png" alt="image-20200411213945861"></p>
+<p>attention损失定义为：</p>
+<p><img src="/2020/04/13/Pay-More-Attention-to-Attention-%E7%AC%94%E8%AE%B0/image-20200411214042215.png" alt="image-20200411214042215"></p>
+</li>
+</ol>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Attention/" rel="tag"># Attention</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/21/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2%E4%B8%8E%E7%89%A9%E4%BD%93%E8%BF%BD%E8%B8%AA/" rel="next" title="视频分割与物体追踪">
+                <i class="fa fa-chevron-left"></i> 视频分割与物体追踪
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/13/Spatial-CNN-%E7%AC%94%E8%AE%B0/" rel="prev" title="Spatial CNN 笔记">
+                Spatial CNN 笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -366,6 +430,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -386,8 +454,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -461,6 +538,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention-的作用"><span class="nav-number">1.</span> <span class="nav-text">Attention 的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention-Transfer"><span class="nav-number">2.</span> <span class="nav-text">Attention Transfer</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -602,6 +695,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
